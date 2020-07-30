@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "camelcase-keys": "^6.2.2",
+    "mysql2": "^2.1.0",
     "sequelize": "^6.3.3",
     "serverless": "^1.77.0",
     "serverless-mysql": "^1.5.4"

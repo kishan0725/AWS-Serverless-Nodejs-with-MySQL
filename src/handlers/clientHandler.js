@@ -15,5 +15,5 @@ module.exports.getClient = async (event, context, callback) => {
       client: client
     }),
   };
-  callback(null, response);
+  callback(null, response);  
 };
