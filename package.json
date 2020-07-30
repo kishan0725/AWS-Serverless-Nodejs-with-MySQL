@@ -1,0 +1,20 @@
+{
+  "name": "codaprojectmanagement",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "camelcase-keys": "^6.2.2",
+    "sequelize": "^6.3.3",
+    "serverless": "^1.77.0",
+    "serverless-mysql": "^1.5.4"
+  },
+  "devDependencies": {
+    "serverless-offline": "^6.5.0"
+  }
+}
