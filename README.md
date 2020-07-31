@@ -1,1 +1,1 @@
-# AWS Serverless(Node.js) with MySQL
+# AWS Serverless(Node.js) with MySQL and Sequelize ORM
