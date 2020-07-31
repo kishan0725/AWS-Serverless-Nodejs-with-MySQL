@@ -10,6 +10,7 @@ var sequelize = new Sequelize(process.env.DATABASE, process.env.USERNAME, proces
     dialect: "mysql",
     define: {
         timestamps: false,
+        freezeTableName: true
     },
     operatorsAliases: 0,
     pool: {

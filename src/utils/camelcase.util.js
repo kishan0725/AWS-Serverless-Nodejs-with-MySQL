@@ -1,6 +1,6 @@
 const camCase = require('camelcase-keys');
 
-const camelCase = async(data)=>{
+const camelCase = (data)=>{
     return camCase(data)
 }
 

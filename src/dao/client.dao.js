@@ -7,7 +7,7 @@ class ClientDAO {
         var clientBn = await clientBean.findOne({ where: {id: clientId }, raw: true } );
         if(clientBn){
             console.log(camelCaseUtil.camelCase(clientBn));
-            return camelCaseUtil.camelCase(clientBn);
+            return await camelCaseUtil.camelCase(clientBn);
         }
         else {
             return "We couldn't find your result";

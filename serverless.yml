@@ -69,6 +69,14 @@ functions:
           path: client
           method: get
           cors: true
+  
+  Skill:
+    handler: src/handlers/skillHandler.getSkill
+    events:
+      - http:
+          path: skills
+          method: get
+          cors: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
