@@ -1,18 +1,13 @@
 'use strict';
-const camelCaseUtil = require('../utils/camelcase.util');
+
+const response = require('../beans/response.bean');
 const SkillService =require('../services/skill.service');
 
-module.exports.getSkill = async (event, context, callback) => {
+module.exports.getSkills = async (event, context, callback) => {
+
   context.callbackWaitsForEmptyEventLoop = false;
   const mySkills = new SkillService();
-  const skills = await mySkills.getSkill(event.queryStringParameters);
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
-    },
-    body: JSON.stringify(camelCaseUtil.camelCase(skills))
-  };
-  callback(null, response);  
+  const skills = await mySkills.getSkills(event.queryStringParameters);
+  callback(null, response.responseBean(skills));   
+  
 };

@@ -1,10 +1,10 @@
 'use strict';
 const ClientService =require('../services/client.service');
 
-module.exports.getClient = async (event, context, callback) => {
+module.exports.getClients = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   const myClient = new ClientService();
-  const client = await myClient.getClient(event.queryStringParameters);
+  const client = await myClient.getClients(event.queryStringParameters);
   const response = {
     statusCode: 200,
     headers: {

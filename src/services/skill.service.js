@@ -1,14 +1,14 @@
 const SkillDAO = require('../dao/skill.dao');
-var _ = require('lodash');
+var lodash = require('lodash');
 class SkillService{
-    async getSkill(skillDetail) {
+    async getSkills(skillDetail) {
         const SkillDetails = new SkillDAO();
         const resourceId = skillDetail.user_id;
         const pageNo = skillDetail.page-1;
         const pageSize = skillDetail.limit;
         const skills = await SkillDetails.getSkillDetails(resourceId, pageNo, pageSize);
-        return _.map(skills, (elm) => { 
-            return _.pick(elm, 'id', 'skill_name', 'description'); 
+        return lodash.map(skills, (elm) => { 
+            return lodash.pick(elm, 'id', 'skill_name', 'description'); 
         });
     }
 }
