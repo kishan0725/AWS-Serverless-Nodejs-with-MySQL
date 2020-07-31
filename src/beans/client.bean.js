@@ -1,33 +1,39 @@
-'use strict'
+/* jshint indent: 2 */
 
-module.exports = (sequelize, DataTypes) => {
-    const Client = sequelize.define("client", {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true
-        },
-        client_name: {
-            type: DataTypes.STRING
-        },
-        about: {
-            type: DataTypes.STRING(500)
-        },
-        profile_picture_url: {
-            type: DataTypes.STRING
-        },
-        created_at: {
-            type: DataTypes.DATE,
-            defaultValue: DataTypes.NOW
-        },
-        updated_at: {
-            type: DataTypes.DATE,
-            defaultValue: DataTypes.NOW
-        },
-        is_active: {
-            type: DataTypes.BOOLEAN
-        }
-    });
-  
-    return Client;
-  };
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('clients', {
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true
+    },
+    client_name: {
+      type: DataTypes.STRING(60),
+      allowNull: false
+    },
+    about: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    profile_picture_url: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    is_active: {
+      type: DataTypes.INTEGER(4),
+      allowNull: true
+    }
+  }, {
+    sequelize,
+    tableName: 'clients'
+  });
+};

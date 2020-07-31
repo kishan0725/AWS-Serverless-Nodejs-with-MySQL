@@ -3,21 +3,28 @@ const Skill = require('./skill.bean');
 module.exports = (sequelize, DataTypes) => {
     const UserSkill = sequelize.define("user_skill", {
         user_id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER(11),
             allowNull: false,
-            primaryKey: true
+            primaryKey: true,
+            references: {
+                tableName: 'user',
+            },
+            key: 'id'
         },
         skill_id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER(11),
             allowNull: false,
+            primaryKey: true,
             references: {
-                model: Skill,
-                key: 'id'
-             }
+                tableName: 'skill',
+            },
+            key: 'id'
         }
     },
     {
-        underscored: true
+        sequelize,
+        underscored: true,
+        tableName: 'user_skill'
     });
   
     return UserSkill;

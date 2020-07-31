@@ -17,6 +17,8 @@
     "serverless-mysql": "^1.5.4"
   },
   "devDependencies": {
+    "sequelize-auto": "^0.5.3",
+    "serverless-dotenv-plugin": "^3.0.0",
     "serverless-offline": "^6.5.0"
   }
 }

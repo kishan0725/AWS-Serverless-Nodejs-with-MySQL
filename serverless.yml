@@ -47,10 +47,10 @@ provider:
 
 # you can define service wide environment variables here
   environment:
-    ENDPOINT: cpm-db.chgptgcuki3o.us-east-1.rds.amazonaws.com
-    DATABASE: cpm-db
-    USERNAME: admin
-    PASSWORD: C0daAcademy2021!
+    ENDPOINT: ${file(./serverless.env.yml):dev.ENDPOINT}
+    DATABASE: ${file(./serverless.env.yml):dev.DATABASE}
+    USERNAME: ${file(./serverless.env.yml):dev.USERNAME}
+    PASSWORD: ${file(./serverless.env.yml):dev.PASSWORD}
 
 # you can add packaging information here
 #package:
@@ -75,6 +75,14 @@ functions:
     events:
       - http:
           path: skills
+          method: get
+          cors: true
+  
+  Resource:
+    handler: src/handlers/resourceHandler.getResources
+    events:
+      - http:
+          path: resources
           method: get
           cors: true
 
@@ -128,3 +136,4 @@ functions:
 #       Value: "Some output value"
 plugins:
   - serverless-offline
+  - serverless-dotenv-plugin
