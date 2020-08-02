@@ -1,7 +1,19 @@
-const camCase = require('camelcase-keys');
+const camelCase = require('lodash').camelCase;
 
-const camelCase = (data)=>{
-    return camCase(data)
-}
+// camelizeKeys function converts the property names to camelCase, works for nested property names too.
+const camelizeKeys = (obj) => {
+    if (Array.isArray(obj)) {
+      return obj.map(v => camelizeKeys(v));
+    } else if (obj !== null && obj.constructor === Object) {
+      return Object.keys(obj).reduce(
+        (result, key) => ({
+          ...result,
+          [camelCase(key)]: camelizeKeys(obj[key]),
+        }),
+        {},
+      );
+    }
+    return obj;
+};
 
-module.exports.camelCase = camelCase;
+module.exports.camelizeKeys = camelizeKeys;

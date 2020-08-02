@@ -1,5 +1,3 @@
-'use strict'
-const Skill = require('./skill.bean');
 module.exports = (sequelize, DataTypes) => {
     const UserSkill = sequelize.define("user_skill", {
         user_id: {
@@ -7,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             primaryKey: true,
             references: {
-                tableName: 'user',
+                tableName: 'users',
             },
             key: 'id'
         },
@@ -16,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             primaryKey: true,
             references: {
-                tableName: 'skill',
+                tableName: 'skills',
             },
             key: 'id'
         }

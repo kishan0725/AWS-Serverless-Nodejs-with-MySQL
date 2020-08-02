@@ -1,5 +1,3 @@
-/* jshint indent: 2 */
-
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('resource_allocated', {
     user_id: {
@@ -8,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       references: {
         model: {
-          tableName: 'user',
+          tableName: 'users',
         },
         key: 'id'
       }
@@ -19,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       references: {
         model: {
-          tableName: 'project',
+          tableName: 'projects',
         },
         key: 'id'
       }

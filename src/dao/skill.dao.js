@@ -17,9 +17,9 @@ class SkillDAO {
                     limit: Number(skillLimit),
                     offset: Number(skillOffset),
                     include: [{
-                                model:userSkillBean, 
-                                where: {user_id: resourceId}, 
-                            }],
+                        model:userSkillBean, 
+                        where: {user_id: resourceId}, 
+                    }],
                 },
                 {raw: true} 
             );

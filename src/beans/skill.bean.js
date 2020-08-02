@@ -1,7 +1,5 @@
-'use strict'
-
 module.exports = function(sequelize, DataTypes) {
-    const Skill = sequelize.define('skill', {
+    const Skill = sequelize.define('skills', {
       id: {
         autoIncrement: true,
         type: DataTypes.INTEGER(11),
@@ -36,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     }, {
       sequelize,
-      tableName: 'skill'
+      tableName: 'skills'
     });
     return Skill;
   };

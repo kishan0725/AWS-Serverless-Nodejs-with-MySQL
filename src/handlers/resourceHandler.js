@@ -11,3 +11,4 @@ module.exports.getResources = async (event, context, callback) => {
   callback(null, response.responseBean(resources));   
   
 };
+  

@@ -1,7 +1,5 @@
-/* jshint indent: 2 */
-
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('project', {
+  return sequelize.define('projects', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER(11),
@@ -52,6 +50,6 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'project'
+    tableName: 'projects'
   });
 };

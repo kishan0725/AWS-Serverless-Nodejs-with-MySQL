@@ -1,4 +1,5 @@
-const camelCaseUtil = require('../utils/camelcase.util');
+const camelCase = require('../utils/camelcase.util');
+
 const responseBean = (res) => {
     return response = {
         statusCode: 200,
@@ -6,7 +7,7 @@ const responseBean = (res) => {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Credentials': true,
         },
-        body: JSON.stringify(camelCaseUtil.camelCase(res))
+        body: JSON.stringify(camelCase.camelizeKeys(res))
     }
 }
 

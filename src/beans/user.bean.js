@@ -1,7 +1,5 @@
-/* jshint indent: 2 */
-
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('user', {
+  return sequelize.define('users', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER(11),
@@ -12,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(70),
       allowNull: false
     },
-    lastname: {
+    last_name: {
       type: DataTypes.STRING(45),
       allowNull: true
     },
@@ -65,7 +63,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'user',
+    tableName: 'users',
     hasTrigger: true
   });
 };

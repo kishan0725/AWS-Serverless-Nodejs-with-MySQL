@@ -1,7 +1,6 @@
 'use strict';
 
 var Sequelize = require('sequelize');
-var db = {};
 
 var sequelize = new Sequelize(process.env.DATABASE, process.env.USERNAME, process.env.PASSWORD, {
     host: process.env.ENDPOINT,
