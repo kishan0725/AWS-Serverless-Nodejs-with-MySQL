@@ -38,6 +38,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     updated_at: {
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
       allowNull: true
     },
     required_resources: {
@@ -46,7 +47,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     is_active: {
       type: DataTypes.INTEGER(4),
-      allowNull: false
+      allowNull: false,
+      values: [0,1],
+      defaultValue: 1
     }
   }, {
     sequelize,

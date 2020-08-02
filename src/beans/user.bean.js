@@ -50,15 +50,18 @@ module.exports = function(sequelize, DataTypes) {
     },
     created_at: {
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
       allowNull: false
     },
     updated_at: {
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
       allowNull: false
     },
     is_active: {
       type: DataTypes.INTEGER(4),
       allowNull: false,
+      values: [0,1],
       defaultValue: 1
     }
   }, {

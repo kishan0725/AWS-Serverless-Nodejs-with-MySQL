@@ -12,7 +12,9 @@ module.exports = function(sequelize, DataTypes) {
       },
       approval_status: {
         type: DataTypes.INTEGER(4),
-        allowNull: false
+        allowNull: false,
+        values: [0,1],
+        defaultValue: 0
       },
       created_at: {
         type: DataTypes.DATE,
