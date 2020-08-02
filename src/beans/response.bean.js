@@ -1,4 +1,4 @@
-const camelCase = require('../utils/camelcase.util');
+const camelCaseUtil = require('../utils/camelcase.util');
 
 const responseBean = (res) => {
     return response = {
@@ -7,7 +7,7 @@ const responseBean = (res) => {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Credentials': true,
         },
-        body: JSON.stringify(camelCase.camelizeKeys(res))
+        body: JSON.stringify(camelCaseUtil.camelizeKeys(res))
     }
 }
 
