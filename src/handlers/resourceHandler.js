@@ -8,7 +8,6 @@ module.exports.getResources = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   const myResources = new ResourceService();
   const resources = await myResources.getResources(event.queryStringParameters);
-  callback(null, response.responseBean(resources));   
+  callback(null, response.responseBean(resources,resources.page_count));   
   
 };
-  

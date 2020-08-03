@@ -32,9 +32,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: true
     },
-    status: {
-      type: DataTypes.STRING(45),
-      allowNull: false
+    is_deleted: {
+      type: DataTypes.INTEGER(4),
+      allowNull: false,
+      values: [0,1],
+      defaultValue: 0
     },
     updated_at: {
       type: DataTypes.DATE,

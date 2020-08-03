@@ -8,6 +8,6 @@ module.exports.getSkills = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   const mySkills = new SkillService();
   const skills = await mySkills.getSkills(event.queryStringParameters);
-  callback(null, response.responseBean(skills));   
+  callback(null, response.responseBean(skills, skills.page_count));   
   
 };

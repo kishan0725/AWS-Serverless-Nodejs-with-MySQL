@@ -30,7 +30,11 @@ class ResourceDAO {
 
             let skillLimit = pageSize;
             let skillOffset = pageNo*pageSize;
+            
+            // to get the count of resources
+            var resourceBnCount = await userBean.count({ where: { user_type_id: 2 } })
 
+            // to get the details of the resources
             var resourceBn = await userBean.findAll(
                 {
                     limit: Number(skillLimit),
@@ -51,10 +55,11 @@ class ResourceDAO {
                         {
                             attributes: ['project_id', 'end_date'],
                             model: resourceAllocatedBean,
-                            where: {is_active: 1},
+                            where: {is_active: 1}, // make sure the resource is active
                             include: [{
                                 attributes: ['project_name'],
-                                model: projectBean
+                                model: projectBean,
+                                here: {is_deleted: 0}, // make sure the project isn't deleted
                             }]
                         }
                     ],
@@ -62,11 +67,15 @@ class ResourceDAO {
                         user_type_id: 2
                     }
                 });
-            
-            // filtering the required values from the 'resourceBn' as we don't want its metadata
-            return await resourceBn.map((res) => {
-                return res.dataValues;
-            }) 
+
+            // returns both query result and count
+            return [
+                // filtering the required values from the 'resourceBn' as we don't want its metadata
+                await resourceBn.map((res) => {
+                    return res.dataValues;
+                }), 
+                resourceBnCount
+            ]; 
 
 
         } catch(error) {
