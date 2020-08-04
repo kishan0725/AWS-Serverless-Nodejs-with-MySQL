@@ -7,7 +7,14 @@ var projectBean = require('../beans/project.bean')(dbConfig.sequelize, dbConfig.
 var Sequelize = require('sequelize');
 
 class ResourceDAO {
-    async getResourceDetails(pageNo, pageSize) {
+    async getResourceDetails(pageNo, pageSize, unassigned) {
+
+        // sort by full name of the resource
+        var orderBy = [
+            ['first_name', 'ASC'],
+            ['last_name', 'ASC']
+        ]
+        
 
         try {
             // defining associations among the beans
@@ -30,18 +37,21 @@ class ResourceDAO {
 
             let skillLimit = pageSize;
             let skillOffset = pageNo*pageSize;
-            
-            // to get the count of resources
-            var resourceBnCount = await userBean.count({ where: { user_type_id: 2 } })
 
-            // to get the details of the resources
-            var resourceBn = await userBean.findAll(
-                {
+            if(unassigned=="false") {
+                // to get the count of all resources
+                var resourceBnCount = await userBean.count({ where: { user_type_id: 2 } });
+
+                // to get the details of all resources
+                var resourceBn = await userBean.findAll({
+                    order: orderBy,
                     limit: Number(skillLimit),
                     offset: Number(skillOffset),
                     attributes: [
                         'id', 
                         [Sequelize.fn('CONCAT', Sequelize.col('first_name'), ' ', Sequelize.col('last_name')),'full_name'],
+                        'first_name',
+                        'last_name'
                     ],
                     include: [
                         {
@@ -55,11 +65,10 @@ class ResourceDAO {
                         {
                             attributes: ['project_id', 'end_date'],
                             model: resourceAllocatedBean,
-                            where: {is_active: 1}, // make sure the resource is active
+                            required: false, // results in both allocated and unallocated resources
                             include: [{
-                                attributes: ['project_name'],
-                                model: projectBean,
-                                here: {is_deleted: 0}, // make sure the project isn't deleted
+                                attributes: ['project_name','is_deleted'],
+                                model: projectBean
                             }]
                         }
                     ],
@@ -67,6 +76,62 @@ class ResourceDAO {
                         user_type_id: 2
                     }
                 });
+            }
+            else {
+
+                // STEPS TO FIND UNALLOCATED RESOURCES ONLY
+                // 1. Find the IDs of allocated resources
+                // 2. Get the count of unallocated resources (IDs of all resources - IDs of allocated resources)
+                // 3. Get the details of unallocated resources
+
+
+                // 1. to get the ID of allocated resources
+                var resourceIds = await resourceAllocatedBean.count({
+                    attributes: ['user_id'],
+                    group: ['user_id']
+                })
+                .then((users) => users.map(user => user.user_id));
+
+                // 2. to get the count of unallocated resources
+                var resourceBnCount = await userBean.count({
+                    where: {
+                        [Sequelize.Op.and]: [{
+                            id: { [Sequelize.Op.notIn]: resourceIds},
+                            user_type_id: 2
+                        }]
+                    }
+                });
+
+                // 3. to get the details of unassigned resources
+                var resourceBn = await userBean.findAll({
+                    order: orderBy,
+                    limit: Number(skillLimit),
+                    offset: Number(skillOffset),
+                    attributes: [
+                        'id', 
+                        [Sequelize.fn('CONCAT', Sequelize.col('first_name'), ' ', Sequelize.col('last_name')),'full_name'],
+                        'first_name',
+                        'last_name'
+                    ],
+                    include: [
+                        {
+                            attributes: ['skill_id'],
+                            model:userSkillBean,
+                            include: [{
+                                attributes: ['skill_name'],
+                                model: skillBean
+                            }]
+                        }, 
+                    ],
+                    where: {
+                        [Sequelize.Op.and]: [{
+                            id: { [Sequelize.Op.notIn]: resourceIds},
+                            user_type_id: 2
+                        }]
+                    }
+                });
+
+            }
 
             // returns both query result and count
             return [

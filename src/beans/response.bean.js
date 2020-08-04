@@ -1,10 +1,17 @@
 const camelCaseUtil = require('../utils/camelcase.util');
 
 const responseBean = (res, page_count) => {
-    camel_res = camelCaseUtil.camelizeKeys({
-        result:res,
-        page_count:page_count
-    })
+
+    // exceptions will have the type of string
+    if(typeof(res)=="string"){
+        camel_res = res
+    }
+    else {
+        camel_res = camelCaseUtil.camelizeKeys({
+            result:res,
+            page_count:page_count
+        })
+    }
     return response = {
         statusCode: 200,
         headers: {
