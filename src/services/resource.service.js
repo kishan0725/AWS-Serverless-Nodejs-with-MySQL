@@ -1,15 +1,16 @@
 const ResourceDAO = require('../dao/resource.dao');
+const DataType = require('../constants/datatypes.constant');
 
 class ResourceService{
     async getResources(ResourceDetail) {
         const ResourceDetails = new ResourceDAO();
         const pageNo = ResourceDetail.page-1;
         const pageSize = ResourceDetail.limit;
-        const unassigned = ResourceDetail.unassigned;
+        const unassigned = (String(true)==ResourceDetail.unassigned)?true:false;
         const resourcesResponse = await ResourceDetails.getResourceDetails(pageNo, pageSize, unassigned);
         
         // exceptions will have the type of string
-        if(typeof(resourcesResponse)=="string") {
+        if(typeof(resourcesResponse)==DataType.string) {
           return resourcesResponse;
         }
         const resources = resourcesResponse[0];

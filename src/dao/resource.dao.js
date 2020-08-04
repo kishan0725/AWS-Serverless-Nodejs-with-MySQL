@@ -38,7 +38,7 @@ class ResourceDAO {
             let skillLimit = pageSize;
             let skillOffset = pageNo*pageSize;
 
-            if(unassigned=="false") {
+            if(!unassigned) {
                 // to get the count of all resources
                 var resourceBnCount = await userBean.count({ where: { user_type_id: 2 } });
 

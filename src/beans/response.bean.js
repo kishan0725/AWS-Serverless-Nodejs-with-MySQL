@@ -1,9 +1,10 @@
 const camelCaseUtil = require('../utils/camelcase.util');
+const DataType = require('../constants/datatypes.constant');
 
 const responseBean = (res, page_count) => {
 
     // exceptions will have the type of string
-    if(typeof(res)=="string"){
+    if(typeof(res)==DataType.string){
         camel_res = res
     }
     else {
