@@ -82,7 +82,7 @@ functions:
     handler: src/handlers/skillHandler.addSkill
     events:
       - http:
-          path: skills/add
+          path: skills
           method: post
           cors: true
   
@@ -144,4 +144,3 @@ functions:
 #       Value: "Some output value"
 plugins:
   - serverless-offline
-  - serverless-dotenv-plugin

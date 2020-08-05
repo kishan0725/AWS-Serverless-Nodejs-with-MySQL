@@ -53,7 +53,9 @@ class SkillDAO {
             else {
                 var approval_status = 0;
             }
-            console.log(approval_status);
+
+            module.exports.approval_status = approval_status;
+
             const addedSkill = await skillBean.create({
                 skill_name: skill_name,
                 approval_status: approval_status,

@@ -8,7 +8,8 @@ module.exports = function(sequelize, DataTypes) {
       },
       skill_name: {
         type: DataTypes.STRING(60),
-        allowNull: false
+        allowNull: false,
+        validate: { len: [0,60] }
       },
       approval_status: {
         type: DataTypes.INTEGER(4),
