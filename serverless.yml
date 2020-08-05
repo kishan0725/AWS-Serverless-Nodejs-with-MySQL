@@ -70,12 +70,20 @@ functions:
           method: get
           cors: true
   
-  Skill:
+  GetSkills:
     handler: src/handlers/skillHandler.getSkills
     events:
       - http:
           path: skills
           method: get
+          cors: true
+  
+  AddSkill:
+    handler: src/handlers/skillHandler.addSkill
+    events:
+      - http:
+          path: skills/add
+          method: post
           cors: true
   
   Resource:

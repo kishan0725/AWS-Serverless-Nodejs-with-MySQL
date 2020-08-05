@@ -3,6 +3,7 @@ var skillBean = require('../beans/skill.bean')(dbConfig.sequelize, dbConfig.Sequ
 var userSkillBean = require('../beans/userSkill.bean')(dbConfig.sequelize, dbConfig.Sequelize);
 
 class SkillDAO {
+
     async getSkillDetails(userId, pageNo, pageSize) {
         try{
             skillBean.hasMany(userSkillBean, {
@@ -37,7 +38,33 @@ class SkillDAO {
             return [skillBn, skillBnCount];
         }
         catch(error) {
-            return "We couldn't get the result. "+error;
+            return "Sorry! We couldn't get the result. " + error;
+        }
+    }
+
+    async addSkillDetails(user_type, user_id, skill_name, skill_desc) {
+
+        try {
+            // making approval_status 1 for managers
+            if(user_type==1){
+                var approval_status = 1;
+            }
+            // making approval_status 0 for resources
+            else {
+                var approval_status = 0;
+            }
+            console.log(approval_status);
+            const addedSkill = await skillBean.create({
+                skill_name: skill_name,
+                approval_status: approval_status,
+                description: skill_desc,
+                skill_requested_by: user_id
+            });
+
+            return "Skill added successfully!";
+        }
+        catch(error) {
+            return "Sorry! We couldn't add the skill. " + error;
         }
     }
 }
